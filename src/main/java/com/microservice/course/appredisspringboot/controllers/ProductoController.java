@@ -13,7 +13,8 @@ public class ProductoController {
     private final IServiceProducto serviceProducto;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Producto> obtenerProductoPorId(Long id) {
+    public ResponseEntity<Producto> obtenerProductoPorId(
+            @PathVariable Long id) {
         return ResponseEntity.ok(serviceProducto.obtenerPorId(id));
     }
 
