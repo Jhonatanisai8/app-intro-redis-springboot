@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.*;
 public class ProductoController {
     private final IServiceProducto serviceProducto;
 
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Producto> crearProducto(
+            @RequestBody Producto producto) {
+        return ResponseEntity.ok(serviceProducto.crearProducto(producto));
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Producto> obtenerProductoPorId(
             @PathVariable Long id) {

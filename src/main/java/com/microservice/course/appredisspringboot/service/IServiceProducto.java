@@ -6,4 +6,5 @@ public interface IServiceProducto {
     Producto obtenerPorId(Long id);
     Producto actualizarProducto(Producto producto);
     void eliminarProducto(Long id);
+    Producto crearProducto(Producto producto);
 }

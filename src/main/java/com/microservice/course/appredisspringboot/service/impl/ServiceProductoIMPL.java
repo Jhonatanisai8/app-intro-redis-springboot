@@ -26,8 +26,7 @@ public class ServiceProductoIMPL implements IServiceProducto {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return productoRepository.findById(id).
-                orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        return productoRepository.findById(id).orElseThrow(() -> new RuntimeException("Producto no encontrado"));
     }
 
     @Override
@@ -42,5 +41,12 @@ public class ServiceProductoIMPL implements IServiceProducto {
     public void eliminarProducto(Long id) {
         log.info("LOG: Eliminando producto de MySQL y purgando llave en Redis...");
         productoRepository.deleteById(id);
+    }
+
+    @Override
+    @CachePut(value = "productos", key = "#producto.id")
+    public Producto crearProducto(Producto producto) {
+        log.info("LOG: Creando producto en MySQL y guardando en cache de Redis...");
+        return productoRepository.save(producto);
     }
 }
